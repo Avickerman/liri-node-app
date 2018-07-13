@@ -1,12 +1,14 @@
+// Still running with some errors
+
+
 require("dotenv").config();
-var Twitter = require('twitter');
-var spotify = require('spotify');
+
 var request = require('request');
 
 
 var keys = require("./keys.js");
 const fs = require('fs');
-// var spotify = new Spotify(keys.spotify);
+var spotify = new spotify(keys.spotify);
 // var client = new Twitter(keys.twitter);
 
 
@@ -58,13 +60,14 @@ function spotifySong(song) {
         if (err) throw err;
     });
 
+
     var search;
     if (song === '') {
         search = 'The Sign Ace Of Base';
     } else {
         search = song;
     }
-
+    
     spotify.search({ type: 'track', query: search }, function (error, data) {
         if (error) {
             var errorStr1 = 'ERROR: Could not spotify track...' + error;
